@@ -1,0 +1,22 @@
+@startuml
+autonumber
+
+actor Researcher
+participant "Flask App" as UI
+participant "MitID" as MitID
+participant "LPR3 Registry" as DB
+
+Researcher -> UI : Open app
+UI --> Researcher : Show login page
+
+Researcher -> UI : Start login
+UI -> MitID : Authenticate researcher
+MitID --> UI : Identity verified
+
+UI --> Researcher : Show search page
+Researcher -> UI : Enter search criteria
+UI -> DB : Execute query
+DB --> UI : Return matching records
+UI --> Researcher : Display results
+
+@enduml
