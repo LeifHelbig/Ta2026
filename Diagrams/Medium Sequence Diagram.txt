@@ -21,18 +21,18 @@ alt Login successful
     UI -> DB : Execute query
     DB --> UI : Return results
 
-    UI -> Audit : Log query
+    UI ->> Audit : Log query
     UI --> Researcher : Display results
 
     opt Export data
         Researcher -> UI : Request export
-        UI -> Audit : Log export
+        UI ->> Audit : Log export
         UI --> Researcher : Download file
     end
 
 else Login failed
     MitID --> UI : Authentication failed
-    UI -> Audit : Log failed login
+    UI ->> Audit : Log failed login
     UI --> Researcher : Show login error
 end
 
