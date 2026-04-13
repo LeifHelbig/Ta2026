@@ -32,7 +32,7 @@ alt Login successful
 
             alt Results found
                 DB --> UI : Return matching records
-                UI -> Audit : Log successful query
+                UI ->> Audit : Log successful query
                 UI --> Researcher : Display results
 
                 opt Export data
@@ -41,29 +41,29 @@ alt Login successful
 
                     alt Export allowed
                         MitID --> UI : Export approved
-                        UI -> Audit : Log export action
+                        UI ->> Audit : Log export action
                         UI --> Researcher : Download file
                     else Export denied
                         MitID --> UI : Export denied
-                        UI -> Audit : Log denied export
+                        UI ->> Audit : Log denied export
                         UI --> Researcher : Show export denied
                     end
                 end
 
             else No results found
                 DB --> UI : Empty result set
-                UI -> Audit : Log empty query
+                UI ->> Audit : Log empty query
                 UI --> Researcher : Show "No results found"
 
             else Query failed
                 DB --> UI : Error message
-                UI -> Audit : Log failed query
+                UI ->> Audit : Log failed query
                 UI --> Researcher : Show query error
             end
 
         else Access denied
             MitID --> UI : Permission denied
-            UI -> Audit : Log unauthorized attempt
+            UI ->> Audit : Log unauthorized attempt
             UI --> Researcher : Show access denied
         end
     end
@@ -77,7 +77,7 @@ alt Login successful
 
 else Login failed
     MitID --> UI : Authentication failed
-    UI -> Audit : Log failed login
+    UI ->> Audit : Log failed login
     UI --> Researcher : Show login error
 end
 
